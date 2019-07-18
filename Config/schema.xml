@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="thelia"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="../../../core/vendor/propel/propel/resources/xsd/database.xsd" >
+    <!--
+    See propel documentation on http://propelorm.org for all information about schema file
+    -->
+    <table name="moretextarea" namespace="MoreTextarea\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="position" type="INTEGER" />
+        <column name="typobj" type="INTEGER" />
+        <column name="typch" type="INTEGER" />
+        <column name="template_id" type="INTEGER" />
+		<column name="title" size="100" type="VARCHAR" />
+        <behavior name="timestampable" />
+    </table>
+
+    <table name="product_moretextarea" namespace="MoreTextarea\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="product_id" required="true" type="INTEGER" />
+        <column name="moretextarea_id" required="true" type="INTEGER" />
+        <column defaultValue="fr_FR" name="locale" size="5" type="VARCHAR" />
+		<column name="chapo" size="255" type="VARCHAR" />
+        <column name="value" type="CLOB" />
+        <foreign-key foreignTable="moretextarea" name="fk_product_moretextarea_moretextarea_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="moretextarea_id" />
+        </foreign-key>
+        <foreign-key foreignTable="product" name="fk_product_moretextarea_product_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="product_id" />
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
+
+    <table name="category_moretextarea" namespace="MoreTextarea\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="category_id" required="true" type="INTEGER" />
+        <column name="moretextarea_id" required="true" type="INTEGER" />
+        <column defaultValue="fr_FR" name="locale" size="5" type="VARCHAR" />
+		<column name="chapo" size="255" type="VARCHAR" />
+        <column name="value" type="CLOB" />
+        <foreign-key foreignTable="moretextarea" name="fk_category_moretextarea_moretextarea_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="moretextarea_id" />
+        </foreign-key>
+        <foreign-key foreignTable="category" name="fk_category_moretextarea_category_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="category_id" />
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
+    <table name="folder_moretextarea" namespace="MoreTextarea\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="folder_id" required="true" type="INTEGER" />
+        <column name="moretextarea_id" required="true" type="INTEGER" />
+        <column defaultValue="fr_FR" name="locale" size="5" type="VARCHAR" />
+		<column name="chapo" size="255" type="VARCHAR" />
+        <column name="value" type="CLOB" />
+        <foreign-key foreignTable="moretextarea" name="fk_folder_moretextarea_moretextarea_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="moretextarea_id" />
+        </foreign-key>
+        <foreign-key foreignTable="folder" name="fk_folder_moretextarea_folder_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="folder_id" />
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
+    <table name="content_moretextarea" namespace="MoreTextarea\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="content_id" required="true" type="INTEGER" />
+        <column name="moretextarea_id" required="true" type="INTEGER" />
+        <column defaultValue="fr_FR" name="locale" size="5" type="VARCHAR" />
+		<column name="chapo" size="255" type="VARCHAR" />
+        <column name="value" type="CLOB" />
+        <foreign-key foreignTable="moretextarea" name="fk_content_moretextarea_moretextarea_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="moretextarea_id" />
+        </foreign-key>
+        <foreign-key foreignTable="content" name="fk_content_moretextarea_content_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="content_id" />
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
+
+    <external-schema filename="local/config/schema.xml" referenceOnly="true" />
+</database>

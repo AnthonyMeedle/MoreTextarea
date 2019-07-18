@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="moretextarea.form.get" path="/admin/modules/moretextarea/form"  methods="get">
+        <default key="_controller">MoreTextarea\Controller\MoreTextareaAdminController::noAction</default>
+    </route>
+    <route id="moretextarea.form.post" path="/admin/modules/moretextarea/form" methods="post">
+        <default key="_controller">MoreTextarea\Controller\MoreTextareaAdminController::formAction</default>
+    </route>
+    
+    <route id="moretextarea.adminTemplate" path="/admin/modules/moretextarea/{template}">
+        <default key="_controller">Thelia\Controller\Admin\AdminController::processTemplateAction</default>
+        <requirement key="template">.*</requirement>
+    </route>
+</routes>
