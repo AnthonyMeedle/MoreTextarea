@@ -30,7 +30,12 @@ If your module use one or more hook, fill this part. Explain which hooks are use
 
 If your module declare one or more loop, describe them here like this :
 
-[loop name]
+{loop type="moretextarea" origine=0 source="category" source_id="{category attr="id"}" name="moreHoraire" locale="{lang attr="locale"}" id=1 }
+  {if $VALUE}
+		<p>{$TITLE}</p>
+		<p>{$VALUE}</p>
+  {/if}
+{/loop}
 
 ### Input arguments
 
