@@ -38,7 +38,7 @@ class MoreTextareaAdminController extends BaseAdminController
 			break;
 			case 'moretextarea_edit_dialog':
 				$text = MoretextareaQuery::create()->findPk($_REQUEST['id']);
-				$text->setTitle($_REQUEST['name'])->save();
+				$text->setTitle($_REQUEST['name'])->setTypch($_REQUEST['typch'])->save();
 			break;
 			case 'moretextarea_supprimer_field':
 				if(null !== $texts = ProductMoretextareaQuery::create()->filterByMoretextareaId($_REQUEST['id'])->find()){
