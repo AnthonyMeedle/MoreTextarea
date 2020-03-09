@@ -5,7 +5,7 @@
     {$admin_current_location = 'moretextarea'}
 {/block}
 
-{block name="page-title"}{intl l='Rajouter des champs texte'}{/block}
+{block name="page-title"}{intl l='Ajouter des champs textes'}{/block}
 
 {block name="main-content"}
 {$nrb_month=1}
@@ -17,7 +17,7 @@
                     <div class="table-responsive">
                          <table class="table table-striped table-condensed" id="lieu_list">
                              <caption>
-								 {intl l="Plus de champs texte aux catégories"}
+								 {intl l="Plus de champs textes aux catégories"}
 
                                  {loop type="auth" name="can_create" role="ADMIN" resource="admin.moretextarea" access="CREATE"}
                                  <a class="btn btn-primary action-btn clickmodiftyp" title="{intl l='Ajouter un nouveau champ texte'}" href="#moretextaea_creation_dialog"  data-typobj="0" data-toggle="modal">

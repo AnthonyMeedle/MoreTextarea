@@ -70,13 +70,13 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
     {
         foreach ($loopResult->getResultDataCollection() as $objet) {
             $loopResultRow = new LoopResultRow($objet);
-				
+            $locale = $this->request->getSession()->getLang()->getLocale();
 			$value='';
 			switch($this->getSource()){
 				case '0':
 				case 'category':
 					if($idSource = $this->getSourceId()){
-						if(null !== $more = CategoryMoretextareaQuery::create()->filterByLocale($this->getLocale())->filterByCategoryId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
+						if(null !== $more = CategoryMoretextareaQuery::create()->filterByLocale($locale)->filterByCategoryId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}
@@ -84,7 +84,7 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
 				case '1':
 				case 'product':
 					if($idSource = $this->getSourceId()){
-						if(null !== $more = ProductMoretextareaQuery::create()->filterByLocale($this->getLocale())->filterByProductId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
+						if(null !== $more = ProductMoretextareaQuery::create()->filterByLocale($locale)->filterByProductId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}
@@ -92,7 +92,7 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
 				case '2':
 				case 'folder':
 					if($idSource = $this->getSourceId()){
-						if(null !== $more = FolderMoretextareaQuery::create()->filterByLocale($this->getLocale())->filterByFolderId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
+						if(null !== $more = FolderMoretextareaQuery::create()->filterByLocale($locale)->filterByFolderId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}
@@ -100,7 +100,7 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
 				case '3':
 				case 'content':
 					if($idSource = $this->getSourceId()){
-						if(null !== $more = ContentMoretextareaQuery::create()->filterByLocale($this->getLocale())->filterByContentId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
+						if(null !== $more = ContentMoretextareaQuery::create()->filterByLocale($locale)->filterByContentId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}
