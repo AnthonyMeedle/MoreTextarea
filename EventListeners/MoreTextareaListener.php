@@ -25,6 +25,7 @@ class MoreTextareaListener extends BaseAction implements EventSubscriberInterfac
 	
     public function product(ProductUpdateEvent $event)
     {
+        if(isset($_REQUEST['moretextarea']))
 		foreach($_REQUEST['moretextarea'] as $idmore => $val){
 			if(null === $more = ProductMoretextareaQuery::create()->filterByLocale($event->getLocale())->filterByProductId($event->getProductId())->filterByMoretextareaId($idmore)->findOne()){
 				$more = new ProductMoretextarea();
@@ -36,6 +37,7 @@ class MoreTextareaListener extends BaseAction implements EventSubscriberInterfac
 
     public function category(CategoryUpdateEvent $event)
     {
+        if(isset($_REQUEST['moretextarea']))
 		foreach($_REQUEST['moretextarea'] as $idmore => $val){
 			if(null === $more = CategoryMoretextareaQuery::create()->filterByLocale($event->getLocale())->filterByCategoryId($event->getCategoryId())->filterByMoretextareaId($idmore)->findOne()){
 				$more = new CategoryMoretextarea();
@@ -46,6 +48,7 @@ class MoreTextareaListener extends BaseAction implements EventSubscriberInterfac
     }
     public function content(ContentUpdateEvent $event)
     {
+        if(isset($_REQUEST['moretextarea']))
 		foreach($_REQUEST['moretextarea'] as $idmore => $val){
 			if(null === $more = ContentMoretextareaQuery::create()->filterByLocale($event->getLocale())->filterByContentId($event->getContentId())->filterByMoretextareaId($idmore)->findOne()){
 				$more = new ContentMoretextarea();
@@ -57,6 +60,7 @@ class MoreTextareaListener extends BaseAction implements EventSubscriberInterfac
 
     public function folder(FolderUpdateEvent $event)
     {
+        if(isset($_REQUEST['moretextarea']))
 		foreach($_REQUEST['moretextarea'] as $idmore => $val){
 			if(null === $more = FolderMoretextareaQuery::create()->filterByLocale($event->getLocale())->filterByFolderId($event->getFolderId())->filterByMoretextareaId($idmore)->findOne()){
 				$more = new FolderMoretextarea();
