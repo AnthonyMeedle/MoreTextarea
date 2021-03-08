@@ -27,6 +27,7 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
     {
         return new ArgumentCollection(
             Argument::createIntListTypeArgument('id'),
+            Argument::createIntListTypeArgument('exclure'),
             Argument::createIntListTypeArgument('origine'),
             Argument::createIntListTypeArgument('category'),
             Argument::createIntListTypeArgument('product'),
@@ -52,6 +53,11 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
             $search->filterById($id, Criteria::IN);
         }
 
+        $exclure = $this->getExclure();
+        if ($exclure) {
+            $search->filterById($exclure, Criteria::NOT_IN);
+        }
+
         $origine = $this->getOrigine();
         if ($origine) {
             $search->filterByTypobj($origine, Criteria::IN);
@@ -72,35 +78,45 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
             $loopResultRow = new LoopResultRow($objet);
             $locale = $this->request->getSession()->getLang()->getLocale();
 			$value='';
-			switch($this->getSource()){
+			$source = $this->getSource();
+			$sourceId =  $this->getSourceId();
+			if(!$this->getSource()){
+				if($this->getCategory()){ $source = 0; $sourceId = $this->getCategory(); }
+				if($this->getProduct()){ $source = 1; $sourceId = $this->getProduct(); }
+				if($this->getFolder()){ $source = 2; $sourceId = $this->getFolder(); }
+				if($this->getContent()){ $source = 3; $sourceId = $this->getContent(); }
+			}
+			
+			
+			switch($source){
 				case '0':
 				case 'category':
-					if($idSource = $this->getSourceId()){
-						if(null !== $more = CategoryMoretextareaQuery::create()->filterByLocale($locale)->filterByCategoryId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
+					if($sourceId){
+						if(null !== $more = CategoryMoretextareaQuery::create()->filterByLocale($locale)->filterByCategoryId($sourceId)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}
 				break;
 				case '1':
 				case 'product':
-					if($idSource = $this->getSourceId()){
-						if(null !== $more = ProductMoretextareaQuery::create()->filterByLocale($locale)->filterByProductId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
+					if($sourceId){
+						if(null !== $more = ProductMoretextareaQuery::create()->filterByLocale($locale)->filterByProductId($sourceId)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}
 				break;
 				case '2':
 				case 'folder':
-					if($idSource = $this->getSourceId()){
-						if(null !== $more = FolderMoretextareaQuery::create()->filterByLocale($locale)->filterByFolderId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
+					if($sourceId){
+						if(null !== $more = FolderMoretextareaQuery::create()->filterByLocale($locale)->filterByFolderId($sourceId)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}
 				break;
 				case '3':
 				case 'content':
-					if($idSource = $this->getSourceId()){
-						if(null !== $more = ContentMoretextareaQuery::create()->filterByLocale($locale)->filterByContentId($idSource)->filterByMoretextareaId($objet->getId())->findOne()){
+					if($sourceId){
+						if(null !== $more = ContentMoretextareaQuery::create()->filterByLocale($locale)->filterByContentId($sourceId)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}
