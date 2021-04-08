@@ -76,7 +76,12 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
     {
         foreach ($loopResult->getResultDataCollection() as $objet) {
             $loopResultRow = new LoopResultRow($objet);
-            $locale = $this->request->getSession()->getLang()->getLocale();
+		$locale = $this->request->getSession()->getLang()->getLocale();
+		if(!empty($_REQUEST['edit_language_id'])){ 
+			$langQuery = LangQuery::create()->findPk($_REQUEST['edit_language_id']);
+			$locale = $langQuery->getLocale();
+		}
+		
 			$value='';
 			$source = $this->getSource();
 			$sourceId =  $this->getSourceId();
