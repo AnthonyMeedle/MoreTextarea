@@ -13,6 +13,7 @@ use Thelia\Core\Template\Loop\Argument\Argument;
 use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
 use Thelia\Type\BooleanOrBothType;
 use Thelia\Model\ConfigQuery;
+use Thelia\Model\LangQuery;
 
 use MoreTextarea\Model\CategoryMoretextareaQuery;
 use MoreTextarea\Model\ProductMoretextareaQuery;
