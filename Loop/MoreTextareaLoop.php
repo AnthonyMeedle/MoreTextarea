@@ -13,7 +13,6 @@ use Thelia\Core\Template\Loop\Argument\Argument;
 use Thelia\Core\Template\Loop\Argument\ArgumentCollection;
 use Thelia\Type\BooleanOrBothType;
 use Thelia\Model\ConfigQuery;
-use Thelia\Model\LangQuery;
 
 use MoreTextarea\Model\CategoryMoretextareaQuery;
 use MoreTextarea\Model\ProductMoretextareaQuery;
@@ -77,12 +76,7 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
     {
         foreach ($loopResult->getResultDataCollection() as $objet) {
             $loopResultRow = new LoopResultRow($objet);
-		$locale = $this->request->getSession()->getLang()->getLocale();
-		if(!empty($_REQUEST['edit_language_id'])){ 
-			$langQuery = LangQuery::create()->findPk($_REQUEST['edit_language_id']);
-			$locale = $langQuery->getLocale();
-		}
-		
+            $locale = $this->getCurrentRequest()->getSession()->getLang()->getLocale();
 			$value='';
 			$source = $this->getSource();
 			$sourceId =  $this->getSourceId();

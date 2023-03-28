@@ -319,6 +319,7 @@
         dialog_body  = {$smarty.capture.moretextaea_creation_dialog nofilter}
         dialog_ok_label     = {intl l="Create this textarea"}
         form_action        = {url path='/admin/modules/moretextarea/form'}
+		form_enctype = 'enctype="multipart/form-data"' 
     }
 
 	{capture "moretextarea_edit_dialog"}
@@ -345,6 +346,7 @@
         dialog_body  = {$smarty.capture.moretextarea_edit_dialog nofilter}
         dialog_ok_label     = {intl l="Edit this textarea"}
         form_action        = {url path='/admin/modules/moretextarea/form'}
+		form_enctype = 'enctype="multipart/form-data"' 
     }
 
 
@@ -353,14 +355,13 @@
 	<input type="hidden" name="success_url" value="{url path='/admin/modules/moretextarea/moretextarea-accueil'}" />
 	<input type="hidden" name="action" value="moretextarea_supprimer_field" />
 {/capture}
-
 {include
 file = "includes/generic-confirm-dialog.html"
 
 dialog_id       = "moretextarea_delete_dialog"
 dialog_title    = {intl l="Supprimer le champ"}
 dialog_message  = {intl l="Êtes vous sur de vouloir supprimer ce champ ?"}
-
+form_enctype = 'enctype="multipart/form-data"' 
 form_action         = {token_url path='/admin/modules/moretextarea/form'}
 form_content        = {$smarty.capture.moretextarea_delete_dialog nofilter}
 }

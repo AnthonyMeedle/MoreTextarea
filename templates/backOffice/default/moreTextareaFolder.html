@@ -1,5 +1,5 @@
 {$langlocale={lang attr="locale"}}
-{if $smarty.get.edit_language_id}
+{if isset($smarty.get.edit_language_id) && $smarty.get.edit_language_id}
 	{loop type="lang" name="lang" id=$smarty.get.edit_language_id}
 		{$langlocale=$LOCALE}
 	{/loop}
