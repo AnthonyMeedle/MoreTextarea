@@ -13,7 +13,7 @@ class MoreTextarea extends BaseModule
 
     public function postActivation(ConnectionInterface $con = null): void{
         $database = new Database($con->getWrappedConnection());
-        $database->insertSql(null, array(__DIR__ . '/Config/thelia.sql'));
+        $database->insertSql(null, array(__DIR__ . '/Config/TheliaMain.sql'));
     }
 	
     public static function configureServices(ServicesConfigurator $servicesConfigurator): void

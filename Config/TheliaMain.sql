@@ -39,8 +39,8 @@ CREATE TABLE `product_moretextarea`
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`),
-    INDEX `FI_product_moretextarea_moretextarea_id` (`moretextarea_id`),
-    INDEX `FI_product_moretextarea_product_id` (`product_id`),
+    INDEX `fi_product_moretextarea_moretextarea_id` (`moretextarea_id`),
+    INDEX `fi_product_moretextarea_product_id` (`product_id`),
     CONSTRAINT `fk_product_moretextarea_moretextarea_id`
         FOREIGN KEY (`moretextarea_id`)
         REFERENCES `moretextarea` (`id`)
@@ -70,8 +70,8 @@ CREATE TABLE `category_moretextarea`
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`),
-    INDEX `FI_category_moretextarea_moretextarea_id` (`moretextarea_id`),
-    INDEX `FI_category_moretextarea_category_id` (`category_id`),
+    INDEX `fi_category_moretextarea_moretextarea_id` (`moretextarea_id`),
+    INDEX `fi_category_moretextarea_category_id` (`category_id`),
     CONSTRAINT `fk_category_moretextarea_moretextarea_id`
         FOREIGN KEY (`moretextarea_id`)
         REFERENCES `moretextarea` (`id`)
@@ -101,8 +101,8 @@ CREATE TABLE `folder_moretextarea`
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`),
-    INDEX `FI_folder_moretextarea_moretextarea_id` (`moretextarea_id`),
-    INDEX `FI_folder_moretextarea_folder_id` (`folder_id`),
+    INDEX `fi_folder_moretextarea_moretextarea_id` (`moretextarea_id`),
+    INDEX `fi_folder_moretextarea_folder_id` (`folder_id`),
     CONSTRAINT `fk_folder_moretextarea_moretextarea_id`
         FOREIGN KEY (`moretextarea_id`)
         REFERENCES `moretextarea` (`id`)
@@ -132,8 +132,8 @@ CREATE TABLE `content_moretextarea`
     `created_at` DATETIME,
     `updated_at` DATETIME,
     PRIMARY KEY (`id`),
-    INDEX `FI_content_moretextarea_moretextarea_id` (`moretextarea_id`),
-    INDEX `FI_content_moretextarea_content_id` (`content_id`),
+    INDEX `fi_content_moretextarea_moretextarea_id` (`moretextarea_id`),
+    INDEX `fi_content_moretextarea_content_id` (`content_id`),
     CONSTRAINT `fk_content_moretextarea_moretextarea_id`
         FOREIGN KEY (`moretextarea_id`)
         REFERENCES `moretextarea` (`id`)
