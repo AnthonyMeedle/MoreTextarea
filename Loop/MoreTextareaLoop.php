@@ -18,6 +18,7 @@ use MoreTextarea\Model\CategoryMoretextareaQuery;
 use MoreTextarea\Model\ProductMoretextareaQuery;
 use MoreTextarea\Model\FolderMoretextareaQuery;
 use MoreTextarea\Model\ContentMoretextareaQuery;
+use MoreTextarea\Model\BrandMoretextareaQuery;
 
 class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
 {
@@ -33,6 +34,7 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
             Argument::createIntListTypeArgument('product'),
             Argument::createIntListTypeArgument('folder'),
             Argument::createIntListTypeArgument('content'),
+            Argument::createIntListTypeArgument('brand'),
             Argument::createAnyTypeArgument('locale'),
             Argument::createIntListTypeArgument('source_id'),
             Argument::createAnyTypeArgument('source')
@@ -77,6 +79,7 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
         foreach ($loopResult->getResultDataCollection() as $objet) {
             $loopResultRow = new LoopResultRow($objet);
             $locale = $this->getCurrentRequest()->getSession()->getLang()->getLocale();
+			if($this->getLocale())$locale=$this->getLocale();
 			$value='';
 			$source = $this->getSource();
 			$sourceId =  $this->getSourceId();
@@ -85,6 +88,7 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
 				if($this->getProduct()){ $source = 1; $sourceId = $this->getProduct(); }
 				if($this->getFolder()){ $source = 2; $sourceId = $this->getFolder(); }
 				if($this->getContent()){ $source = 3; $sourceId = $this->getContent(); }
+				if($this->getBrand()){ $source = 4; $sourceId = $this->getBrand(); }
 			}
 			
 			
@@ -117,6 +121,14 @@ class MoreTextareaLoop extends BaseLoop implements PropelSearchLoopInterface
 				case 'content':
 					if($sourceId){
 						if(null !== $more = ContentMoretextareaQuery::create()->filterByLocale($locale)->filterByContentId($sourceId)->filterByMoretextareaId($objet->getId())->findOne()){
+							$value=$more->getValue();
+						}
+					}
+				break;
+				case '4':
+				case 'brand':
+					if($sourceId){
+						if(null !== $more = BrandMoretextareaQuery::create()->filterByLocale($locale)->filterByBrandId($sourceId)->filterByMoretextareaId($objet->getId())->findOne()){
 							$value=$more->getValue();
 						}
 					}

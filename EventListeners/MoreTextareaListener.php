@@ -9,6 +9,7 @@ use Thelia\Core\Event\Product\ProductUpdateEvent;
 use Thelia\Core\Event\Content\ContentUpdateEvent;
 use Thelia\Core\Event\Category\CategoryUpdateEvent;
 use Thelia\Core\Event\Folder\FolderUpdateEvent;
+use Thelia\Core\Event\Brand\BrandUpdateEvent;
 use MoreTextarea\Model\MoretextareaQuery;
 use MoreTextarea\Model\Moretextarea;
 use MoreTextarea\Model\CategoryMoretextareaQuery;
@@ -19,6 +20,8 @@ use MoreTextarea\Model\FolderMoretextareaQuery;
 use MoreTextarea\Model\FolderMoretextarea;
 use MoreTextarea\Model\ContentMoretextareaQuery;
 use MoreTextarea\Model\ContentMoretextarea;
+use MoreTextarea\Model\BrandMoretextareaQuery;
+use MoreTextarea\Model\BrandMoretextarea;
 
 class MoreTextareaListener extends BaseAction implements EventSubscriberInterface
 {
@@ -69,6 +72,17 @@ class MoreTextareaListener extends BaseAction implements EventSubscriberInterfac
 			$more->setValue($val)->save();
 		}
     }
+    public function brand(BrandUpdateEvent $event)
+    {
+        if(isset($_REQUEST['moretextarea']))
+		foreach($_REQUEST['moretextarea'] as $idmore => $val){
+			if(null === $more = BrandMoretextareaQuery::create()->filterByLocale($event->getLocale())->filterByBrandId($event->getBrandId())->filterByMoretextareaId($idmore)->findOne()){
+				$more = new BrandMoretextarea();
+				$more->setBrandId($event->getBrandId())->setMoretextareaId($idmore)->setLocale($event->getLocale());
+			}
+			$more->setValue($val)->save();
+		}
+    }
 
     public static function getSubscribedEvents()
     {
@@ -76,7 +90,8 @@ class MoreTextareaListener extends BaseAction implements EventSubscriberInterfac
             TheliaEvents::PRODUCT_UPDATE => array('product', 128),
             TheliaEvents::CATEGORY_UPDATE => array('category', 128),
             TheliaEvents::FOLDER_UPDATE => array('folder', 128),
-            TheliaEvents::CONTENT_UPDATE => array('content', 128)
+            TheliaEvents::CONTENT_UPDATE => array('content', 128),
+            TheliaEvents::BRAND_UPDATE => array('brand', 128)
         );
     }
 }

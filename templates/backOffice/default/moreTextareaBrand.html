@@ -1,0 +1,16 @@
+{$langlocale={lang attr="locale"}}
+{if isset($smarty.get.edit_language_id) && $smarty.get.edit_language_id}
+	{loop type="lang" name="lang" id=$smarty.get.edit_language_id}
+		{$langlocale=$LOCALE}
+	{/loop}
+{/if}
+{loop name="moretextarea" type="moretextarea" origine=4 source='brand' source_id={brand attr="id"} locale="{$langlocale}" }
+<div class="form-group ">
+	<label for="summary_field{$ID}" class="control-label">{$TITLE}</label>
+	{if $TYPCH == 0}
+		<input id="summary_field{$ID}" name="moretextarea[{$ID}]" class="form-control" value="{$VALUE}">
+	{else}		
+		<textarea id="summary_field{$ID}" name="moretextarea[{$ID}]" class="form-control {if $TYPCH == 2}wysiwyg{/if}" rows="3">{$VALUE}</textarea>
+	{/if}
+</div>
+{/loop}

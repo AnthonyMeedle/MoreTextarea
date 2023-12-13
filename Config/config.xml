@@ -37,6 +37,7 @@
             <tag name="hook.event_listener" event="category.modification.form-right.bottom" type="back" method="onCategoryModificationFormRightBottom" />
             <tag name="hook.event_listener" event="folder.modification.form-right.bottom" type="back" method="onFolderModificationFormRightBottom" />
             <tag name="hook.event_listener" event="content.modification.form-right.bottom" type="back" method="onContentModificationFormRightBottom" />
+            <tag name="hook.event_listener" event="brand.modification.form-right.bottom" type="back" method="onBrandModificationFormRightBottom" />
             
 		</hook>   
     </hooks>

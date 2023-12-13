@@ -33,4 +33,8 @@ class MoreTextareaTools extends BaseHook {
 		$html = $this->render("moreTextareaContent.html", array("object_id" => $event->getArgument('id', null), "object_type" => $event->getArgument('type', null)));
 		$event->add($html);	
     }
+    public function onBrandModificationFormRightBottom(HookRenderEvent $event){
+		$html = $this->render("moreTextareaBrand.html", array("object_id" => $event->getArgument('id', null), "object_type" => $event->getArgument('type', null)));
+		$event->add($html);	
+    }
 }

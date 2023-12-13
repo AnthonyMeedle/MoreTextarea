@@ -146,5 +146,36 @@ CREATE TABLE `content_moretextarea`
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+-- ---------------------------------------------------------------------
+-- brand_moretextarea
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `brand_moretextarea`;
+
+CREATE TABLE `brand_moretextarea`
+(
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `brand_id` INTEGER NOT NULL,
+    `moretextarea_id` INTEGER NOT NULL,
+    `locale` VARCHAR(5) DEFAULT 'fr_FR',
+    `chapo` VARCHAR(255),
+    `value` LONGTEXT,
+    `created_at` DATETIME,
+    `updated_at` DATETIME,
+    PRIMARY KEY (`id`),
+    INDEX `fi_brand_moretextarea_moretextarea_id` (`moretextarea_id`),
+    INDEX `fi_brand_moretextarea_brand_id` (`brand_id`),
+    CONSTRAINT `fk_brand_moretextarea_moretextarea_id`
+        FOREIGN KEY (`moretextarea_id`)
+        REFERENCES `moretextarea` (`id`)
+        ON UPDATE RESTRICT
+        ON DELETE CASCADE,
+    CONSTRAINT `fk_brand_moretextarea_brand_id`
+        FOREIGN KEY (`brand_id`)
+        REFERENCES `brand` (`id`)
+        ON UPDATE RESTRICT
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

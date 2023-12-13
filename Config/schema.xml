@@ -77,6 +77,21 @@
         </foreign-key>
         <behavior name="timestampable" />
     </table>
+    <table name="brand_moretextarea" namespace="MoreTextarea\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="brand_id" required="true" type="INTEGER" />
+        <column name="moretextarea_id" required="true" type="INTEGER" />
+        <column defaultValue="fr_FR" name="locale" size="5" type="VARCHAR" />
+		<column name="chapo" size="255" type="VARCHAR" />
+        <column name="value" type="CLOB" />
+        <foreign-key foreignTable="moretextarea" name="fk_brand_moretextarea_moretextarea_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="moretextarea_id" />
+        </foreign-key>
+        <foreign-key foreignTable="brand" name="fk_brand_moretextarea_brand_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="brand_id" />
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
 
     <external-schema filename="local/config/schema.xml" referenceOnly="true" />
 </database>
